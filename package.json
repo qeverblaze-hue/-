@@ -1,0 +1,12 @@
+{
+  "name": "one-more-bite-snake",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A small, dependency-free snake game.",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test game.test.js"
+  },
+  "engines": { "node": ">=20" }
+}

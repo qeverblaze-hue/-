@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f7f1" />
+    <meta name="description" content="一口接一口：清爽的贪吃蛇小游戏。用键盘或触屏，放松一下，刷新你的最高分。" />
+    <title>一口接一口 · 贪吃蛇</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="一口接一口首页">
+          <img src="./favicon.svg" width="38" height="38" alt="" />
+          <span>一口接一口<span class="brand-en">ONE MORE BITE</span></span>
+        </a>
+        <span class="header-note"><span class="live-dot"></span> 给自己，放个小假</span>
+      </header>
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">LITTLE GAME, BIG APPETITE</p>
+            <h1 id="page-title">快乐，再长一点<span class="title-dot">。</span></h1>
+            <p class="intro-description">熟悉的贪吃蛇，简单的小快乐。吃颗果实，看看这次能走多远。</p>
+          </div>
+          <div class="edition"><span>THE CLASSICS</span><span>№ 001 <span class="edition-line"></span> SNAKE</span></div>
+        </section>
+        <div class="game-layout">
+          <section class="board-card" aria-label="贪吃蛇游戏">
+            <div class="board-toolbar">
+              <div class="board-label"><span class="small-squares" aria-hidden="true">▦</span><span>经典模式 <span class="grid-size">/ 20 × 20</span></span></div>
+              <span class="status-pill" id="status-pill"><span></span><span id="status-text">准备就绪</span></span>
+            </div>
+            <div class="board-wrap" id="board-wrap">
+              <canvas id="game-board" width="600" height="600" tabindex="0" aria-label="贪吃蛇棋盘。用方向键或 W A S D 移动，空格暂停。">请使用支持 Canvas 的浏览器玩游戏。</canvas>
+              <div class="game-overlay" id="game-overlay">
+                <div class="overlay-content">
+                  <span class="overlay-icon" aria-hidden="true">✳</span>
+                  <p class="overlay-kicker" id="overlay-kicker">A FRESH LITTLE START</p>
+                  <h2 id="overlay-title">准备好开吃了吗？</h2>
+                  <p id="overlay-description">不着急，一口一口来。</p>
+                  <button class="primary-button" id="play-button" type="button"><span id="play-label">开始游戏</span><span aria-hidden="true">↗</span></button>
+                  <span class="overlay-hint" id="overlay-hint">或按空格键开始</span>
+                </div>
+              </div>
+            </div>
+            <div class="board-bottom">
+              <span><span class="fruit-dot" aria-hidden="true"></span> 每一颗果实，+10 分</span>
+              <div class="board-actions">
+                <button class="icon-button" id="pause-button" aria-label="暂停游戏" title="暂停 / 继续（空格）" disabled type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 4v12M13 4v12"/></svg><span id="pause-label">暂停</span></button>
+                <span class="action-divider"></span>
+                <button class="icon-button" id="restart-button" aria-label="重新开始游戏" title="重新开始（R）" type="button"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8a6.2 6.2 0 1 1-.2 4M4 3v5h5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>重来</span></button>
+              </div>
+            </div>
+            <div class="touch-controls" aria-label="触屏方向控制">
+              <button type="button" data-direction="up" aria-label="向上">↑</button>
+              <button type="button" data-direction="left" aria-label="向左">←</button>
+              <span class="touch-center" aria-hidden="true">✳</span>
+              <button type="button" data-direction="right" aria-label="向右">→</button>
+              <button type="button" data-direction="down" aria-label="向下">↓</button>
+            </div>
+          </section>
+          <aside class="sidebar" aria-label="得分与游戏设置">
+            <section class="score-card">
+              <div class="score-heading"><h2>这一局的收获</h2><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m12 3 2.6 5.4 6 .9-4.3 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.3-4.2 6-.9L12 3Z"/></svg></div>
+              <div class="main-score"><span id="score">000</span><span>分</span></div>
+              <p class="score-caption" id="score-caption">每一个新纪录，都从第一口开始。</p>
+              <div class="score-details">
+                <div><span class="stat-label"><span aria-hidden="true">♧</span> 历史最高</span><strong id="best-score">000</strong></div>
+                <div><span class="stat-label"><span aria-hidden="true">↗</span> 当前长度</span><strong><span id="snake-length">4</span><span class="stat-unit"> 格</span></strong></div>
+              </div>
+            </section>
+            <section class="settings-card">
+              <div class="section-heading"><h2>找到你的节奏</h2><span aria-hidden="true">◴</span></div>
+              <div class="speed-options" role="group" aria-label="游戏速度">
+                <button type="button" data-speed="slow" aria-pressed="false">慢慢来</button>
+                <button type="button" data-speed="normal" aria-pressed="true" class="selected">刚刚好</button>
+                <button type="button" data-speed="fast" aria-pressed="false">挑战一下</button>
+              </div>
+              <p id="speed-description">不快不慢，快乐刚刚好。</p>
+            </section>
+            <section class="howto-card">
+              <h2>小小操作，大大快乐</h2>
+              <div class="instruction-row"><span>控制方向</span><span class="key-group"><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></span></div>
+              <div class="instruction-row"><span>也可以用</span><span class="key-group"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span></div>
+              <div class="instruction-row"><span>休息一下</span><kbd class="wide-key">空格</kbd></div>
+              <div class="rule-note"><span aria-hidden="true">✦</span><p>记得躲开墙壁和自己的尾巴。<br />手机上也可以滑动棋盘操作。</p></div>
+            </section>
+            <p class="little-note"><span aria-hidden="true">〰</span> 不赶时间，只赶快乐。</p>
+          </aside>
+        </div>
+        <p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
+        <noscript><p class="noscript-message">请启用 JavaScript 后开始游戏。</p></noscript>
+      </main>
+      <footer><span>MADE FOR A LITTLE BREAK.</span><span>简单一点，开心一点。 <span aria-hidden="true">✳</span></span></footer>
+    </div>
+  </body>
+</html>
